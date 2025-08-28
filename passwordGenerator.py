@@ -96,12 +96,15 @@ class Password:
         elif self.eXS == 0 and self.eXP and self.eXD == 1:
             # exlude ascii_letters
             ALL = string.digits + string.punctuation 
-        elif int(self.eXD) == 1 and int(self.eXP) == 0 and  int(self.eXS) == 0:
+        elif self.eXD == 1 and self.eXP== 0 and  self.eXS == 0:
             ALL = string.digits
             print("[bold yellow]You've excluded both ascii_letters, punctuations[/bold yellow]")
             print("[bold yellow]So to avoid raising a [red]'ValueError: Sample larger than population or is negative'[/red][/bold yellow]")
             print("[bold yellow]'self.PassLength' has been assigned a new value (10)[/bold yellow]")
-            self.PassLength = 10
+            self.PassLength = len(string.digits)
+        elif self.eXD == 0 and self.eXP == 1 and self.eXS == 0:
+            ALL = string.punctuation 
+            self.PassLength = len(string.punctuation) 
         for password in range(self.pNumber):#self.pNumber):
             password = self.prefix_+"_"+''.join(random.sample(ALL, self.PassLength))
             PassList.append(password)
